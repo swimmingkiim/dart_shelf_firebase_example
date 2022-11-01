@@ -1,7 +1,9 @@
 # dart_shelf_firebase_example
 
-## Run Dev mode
+## Before you test
+1. Edit `lib/util/get_auth_client.dart` to make sure you request the right scopes for your project. (default code requires your project is enabled with firestore)
 
+## Run Dev mode
 1. Download `service-account.json` file of your project on Google Cloud Console.
 2. Copy the file into root of this project directory.
 3. Run command below to see if google authentication is ok.
