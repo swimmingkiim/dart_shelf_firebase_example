@@ -18,5 +18,10 @@ Router _$AppControllerRouter(AppController service) {
     r'/<name|[a-zA-Z]+>',
     service.greeting,
   );
+  router.add(
+    'GET',
+    r'/list/<collectionId|[a-zA-Z]+>',
+    service.listDocuments,
+  );
   return router;
 }

@@ -10,7 +10,8 @@ class AppModule {
 
   final AuthClient authClient;
 
-  final AppController appController = AppController(appService: AppService());
+  late final AppController appController =
+      AppController(appService: AppService(authClient: authClient));
   final AppMiddleware appMiddleware = AppMiddleware();
 
   late final UserModule userModule = UserModule(authClient: authClient);
