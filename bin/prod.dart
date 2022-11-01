@@ -15,9 +15,7 @@ Future mainProd() async {
   final projectId = await currentProjectId();
   print('Current GCP project id: $projectId');
 
-  final authClient = await clientViaApplicationDefaultCredentials(
-    scopes: [FirestoreApi.datastoreScope],
-  );
+  final authClient = await getAuthClient(null);
 
   try {
     final api = FirestoreApi(authClient);
