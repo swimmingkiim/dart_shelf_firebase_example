@@ -12,3 +12,10 @@ dart run ./bin/dart_shelf_firebase_example.dart dev
 
 ## Run Production mode
 (currently working on it...)
+
+## How to add controller using `shelf_router_generator` annotations
+1. Create `[module_name]_controller.dart`.
+2. Run below command.
+```bash
+dart pub run build_runner build
+```
