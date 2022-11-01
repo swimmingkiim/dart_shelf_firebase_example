@@ -1,5 +1,4 @@
 import 'package:googleapis/firestore/v1.dart' as firestore;
-import 'package:googleapis/fcm/v1.dart' as fcm;
 import 'package:googleapis_auth/auth_io.dart';
 
 // Ref : https://github.com/google/googleapis.dart/tree/master/googleapis_auth#autonomous-application--service-account
@@ -11,7 +10,6 @@ Future<AutoRefreshingAuthClient> getAuthClient(
       scopes: [
         firestore.FirestoreApi.cloudPlatformScope,
         firestore.FirestoreApi.datastoreScope,
-        fcm.FirebaseCloudMessagingApi.firebaseMessagingScope,
       ],
     );
   }
@@ -19,6 +17,5 @@ Future<AutoRefreshingAuthClient> getAuthClient(
       ServiceAccountCredentials.fromJson(serviceAccountJson), [
     firestore.FirestoreApi.cloudPlatformScope,
     firestore.FirestoreApi.datastoreScope,
-    fcm.FirebaseCloudMessagingApi.firebaseMessagingScope,
   ]);
 }
