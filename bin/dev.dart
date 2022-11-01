@@ -11,7 +11,7 @@ void mainDev() async {
     ),
   );
 
-  final app = AppModule();
+  final app = AppModule(authClient: authClient);
   final server =
       await shelf_io.serve(app.router, InternetAddress.loopbackIPv4, 8080);
 

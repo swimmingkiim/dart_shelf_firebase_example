@@ -2,13 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'dart:convert';
-
-import 'package:googleapis/firestore/v1.dart';
-import 'package:googleapis_auth/auth_io.dart';
-import 'package:shelf/shelf.dart';
-import 'package:shelf_router/shelf_router.dart';
-
 import 'package:dart_shelf_firebase_example/dart_shelf_firebase_example.dart';
 
 Future mainProd() async {
@@ -18,43 +11,10 @@ Future mainProd() async {
   final authClient = await getAuthClient(null);
 
   try {
-    final api = FirestoreApi(authClient);
+    final app = AppModule(authClient: authClient);
 
-    Future<Response> incrementHandler(Request request) async {
-      final result = await api.projects.databases.documents.commit(
-        _incrementRequest(projectId),
-        'projects/$projectId/databases/(default)',
-      );
-
-      return Response.ok(
-        JsonUtf8Encoder(' ').convert(result),
-        headers: {
-          'content-type': 'application/json',
-        },
-      );
-    }
-
-    final router = Router()..get('/', incrementHandler);
-
-    await serveHandler(router);
+    await serveHandler(app.router);
   } finally {
     authClient.close();
   }
 }
-
-CommitRequest _incrementRequest(String projectId) => CommitRequest(
-      writes: [
-        Write(
-          transform: DocumentTransform(
-            document:
-                'projects/$projectId/databases/(default)/documents/settings/count',
-            fieldTransforms: [
-              FieldTransform(
-                fieldPath: 'count',
-                increment: Value(integerValue: '1'),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
