@@ -1,5 +1,12 @@
-import 'package:dart_shelf_firebase_example/dart_shelf_firebase_example.dart' as dart_shelf_firebase_example;
+import 'dart:io';
 
-void main(List<String> arguments) {
-  print('Hello world: ${dart_shelf_firebase_example.calculate()}!');
+import 'package:shelf/shelf_io.dart' as shelf_io;
+import 'package:dart_shelf_firebase_example/dart_shelf_firebase_example.dart';
+
+void main(List<String> arguments) async {
+  final app = AppModule();
+  final server =
+      await shelf_io.serve(app.router, InternetAddress.loopbackIPv4, 8080);
+
+  print('Serving at http://${server.address.host}:${server.port}');
 }
