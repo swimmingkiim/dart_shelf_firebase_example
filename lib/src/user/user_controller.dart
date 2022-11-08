@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'user_service.dart';
@@ -15,6 +17,12 @@ class UserController {
 
   @Route.get('/')
   Response sayHi(Request request) => Response.ok('hello user');
+
+  @Route.get('/list')
+  Future<Response> listUsers(Request request) async {
+    final data = await userService.listUsers();
+    return Response.ok(jsonEncode(data));
+  }
 
   @Route.get('/<name|[a-zA-Z]+>')
   Response greeting(Request request, String name) =>

@@ -9,8 +9,8 @@ class UserModule {
 
   final AuthClient authClient;
 
-  final UserController userController =
-      UserController(userService: UserService());
+  late final UserController userController =
+      UserController(userService: UserService(authClient: authClient));
   final UserMiddleware userMiddleware = UserMiddleware();
 
   Handler get router => Pipeline()

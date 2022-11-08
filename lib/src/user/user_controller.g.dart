@@ -15,6 +15,11 @@ Router _$UserControllerRouter(UserController service) {
   );
   router.add(
     'GET',
+    r'/list',
+    service.listUsers,
+  );
+  router.add(
+    'GET',
     r'/<name|[a-zA-Z]+>',
     service.greeting,
   );
